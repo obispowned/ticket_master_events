@@ -15,7 +15,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class HomeViewModel () : ViewModel() {
+class HomeViewModel() : ViewModel() {
 
     private val _ciudades = listOf("Madrid", "Barcelona", "Paris", "New York")
     val ciudades: LiveData<List<String>> = MutableLiveData(_ciudades)
@@ -31,56 +31,44 @@ class HomeViewModel () : ViewModel() {
     init {
         kotlin.run {
             getEventsByCity(selectedText.value!!)
-
         }
     }
 
-    fun changeGrid(){
-        if (gridDesign.value == 2){
+    fun changeGrid() {
+        if (gridDesign.value == 2) {
             _gridDesign.value = 1
-        }
-        else{
+        } else {
             _gridDesign.value = 2
         }
     }
 
-
     fun getEventsByCity(city: String) {
         viewModelScope.launch {
             try {
-            val api = ticketmasterApiService
-            val response = api.getEventsByCity(city)
-            if (response.isSuccessful){
-                val eventResponse = response.body() //puede que este recibiendo mas como events
-                val event = eventResponse?.embedded?.events
-                event.let {
-                    _events.value = it
+                val api = ticketmasterApiService
+                val response = api.getEventsByCity(city)
+                if (response.isSuccessful) {
+                    val eventResponse = response.body()
+                    val event = eventResponse?.embedded?.events
+                    event.let {
+                        _events.value = it
+                    }
+                } else {
+                    Log.d("RESPONSE", "Error: ${response.code()}")
                 }
-                Log.d("RESPONSE", "${response.code()} - ${eventResponse.toString()}, ${_events.value}")
-                Log.d("RESPONSE 2", event?.firstOrNull()?.name.toString())
-            }else{
-                Log.d("RESPONSE3", "Error: ${response.code()}")
-            }
             } catch (e: Exception) {
-                Log.e("RESPONSE4", "Exception: ${e.message}")
+                Log.e("RESPONSE", "Exception: ${e.message}")
             }
-
         }
     }
 
-    private fun serviceCreator(): TicketMasterApiService { //CREAR SERVICIO PARA HACER LAS LLAMADAS
-        return getRetrofitInstance().create(TicketMasterApiService::class.java)
-    }
-
-    private fun getRetrofitInstance(): Retrofit { //CREAR INSTANCIA RETROFIT
+    private fun getRetrofitInstance(): Retrofit {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.ticketmaster.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         return retrofit
     }
-
-
 
 
 }

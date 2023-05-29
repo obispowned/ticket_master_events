@@ -55,16 +55,12 @@ data class Dates(
 )
 
 data class Embedded(
-
     @SerializedName("events") var events: List<Events>
-
 )
 
 data class Genre (
-
     @SerializedName("id") var id : String,
     @SerializedName("name") var name : String
-
 )
 
 data class  Images (
@@ -72,95 +68,73 @@ data class  Images (
 )
 
 data class Links (
-
     @SerializedName("self") var self : Self
-
 )
 
 data class Location (
-
     @SerializedName("longitude") var longitude : String,
     @SerializedName("latitude") var latitude : String
-
 )
 
 data class Markets (
-
     @SerializedName("id") var id : String
-
 )
 
 data class Next (
-
     @SerializedName("href") var href : String,
     @SerializedName("templated") var templated : Boolean
-
 )
 
 data class Page (
-
     @SerializedName("size") var size : Int,
     @SerializedName("totalElements") var totalElements : Int,
     @SerializedName("totalPages") var totalPages : Int,
     @SerializedName("number") var number : Int
-
 )
 
 data class Promoter (
-
     @SerializedName("id") var id : String
-
 )
 
 data class Public(
-
     @SerializedName("startDateTime") var startDateTime: String,
     @SerializedName("startTBD") var startTBD: Boolean,
     @SerializedName("endDateTime") var endDateTime: String
-
 )
 
 data class ResponseBody (
-
     @SerializedName("_links") var Links : Links,
     @SerializedName("_embedded") var Embedded : Embedded,
     @SerializedName("page") var page : Page
-
 )
-
 
 data class Sales (
-
     @SerializedName("public") var public : Public
-
 )
-data class Segment (
 
+data class Segment (
     @SerializedName("id") var id : String,
     @SerializedName("name") var name : String
-
 )
+
 data class Self (
-
     @SerializedName("href") var href : String
-
 )
-data class Start(
 
+data class Start(
     @SerializedName("localDate") var localDate: String,
     @SerializedName("dateTBD") var dateTBD: Boolean,
     @SerializedName("dateTBA") var dateTBA: Boolean,
     @SerializedName("dateTime") var dateTime: String,
     @SerializedName("timeTBA") var timeTBA: Boolean,
     @SerializedName("noSpecificTime") var noSpecificTime: Boolean
-
 )
-data class State (
 
+data class State (
     @SerializedName("name") var name : String,
     @SerializedName("stateCode") var stateCode : String
-
 )
+
 data class Status(
     @SerializedName("code") var code: String
 )
@@ -169,6 +143,7 @@ data class SubGenre (
     @SerializedName("id") var id : String,
     @SerializedName("name") var name : String
 )
+
 data class Venues (
     @SerializedName("name") var name : String,
     @SerializedName("type") var type : String,
@@ -184,7 +159,6 @@ data class Venues (
     @SerializedName("location") var location : Location,
     @SerializedName("markets") var markets : List<Markets>,
     @SerializedName("_links") var Links : Links
-
 )
 
 data class Area (

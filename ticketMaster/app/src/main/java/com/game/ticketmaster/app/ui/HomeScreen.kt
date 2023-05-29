@@ -95,14 +95,11 @@ fun HomeScreen(navController: NavController, homeViewModel: HomeViewModel) {
 
 @Composable
 fun ItemEvent(event: Events, function: () -> Unit) {
-    var isExpanded by remember { mutableStateOf(false) }
     var showDialog by rememberSaveable {mutableStateOf(false)}
     Card(elevation = CardDefaults.cardElevation(10.dp),
         modifier = Modifier
             .clickable {
                 showDialog = true
-                isExpanded = !isExpanded
-                Log.d("IS EXPANDED", isExpanded.toString())
             }
             .padding(8.dp)
     ) {
@@ -141,16 +138,6 @@ fun ItemEvent(event: Events, function: () -> Unit) {
             event.dates.start?.localDate?. let{formattedDate=formatDate(it)}
             Spacer(modifier = Modifier.height(4.dp))
             Text(text = formattedDate, Modifier.fillMaxWidth(), color = Teal900, fontSize = 12.sp)
-            /*if (isExpanded) {
-                Row(modifier = Modifier.fillMaxWidth()) {
-                    event.classifications.first().genre.name.toString()?.let { Text(text = "Genre: " + it) }
-                    Text(text = " | ")
-                    event.classifications.first().subGenre.name.toString()?.let { Text(text = "Subgenre: " + it) }
-                }
-                event.venue?.address.toString()?.let { Text(text = "Direccion: " + it) }
-                Text(text = "popop")
-                Text(text = "popop")
-            }*/
         }
     }
 }
@@ -164,8 +151,6 @@ fun formatDate(inputDate: String): String {
 
 @Composable
 fun Mygrid(homeViewModel: HomeViewModel, selectedText: String, events: List<Events>?) {
-    val context = LocalContext.current
-    val myList = listOf("pepe", "manuel", "gloria")
     val gridDesignValue by homeViewModel.gridDesign.observeAsState(initial = 1)
     LazyVerticalGrid(columns = GridCells.Fixed(gridDesignValue)) {
         events?.let { eventList ->
@@ -227,19 +212,6 @@ fun MyAlertDialog(event: Events, showDialog: Boolean, onClose: () -> Unit) {
             }
         }
     }
-    /*AlertDialog(
-        onDismissRequest = onClose,
-        title = { Text(text = event.name, fontWeight = FontWeight.Bold) },
-        text = {
-            Column {
-                Text(text = event.name)
-                Text(text = event.Links.toString())
-                // Otros detalles del evento
-            }
-        },
-        confirmButton = {},
-        dismissButton = {}
-    )*/
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
