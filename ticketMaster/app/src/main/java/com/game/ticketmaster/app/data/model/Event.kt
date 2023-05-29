@@ -6,7 +6,7 @@ data class Events(
     @SerializedName("name") var name: String,
     @SerializedName("type") var type: String,
     @SerializedName("id") var id: String,
-    @SerializedName("venues") var venues: Venues,
+    @SerializedName("venue") var venue: Venues,
     @SerializedName("test") var test: Boolean,
     @SerializedName("url") var url: String,
     @SerializedName("locale") var locale: String,
@@ -162,18 +162,14 @@ data class State (
 
 )
 data class Status(
-
     @SerializedName("code") var code: String
-
 )
-data class SubGenre (
 
+data class SubGenre (
     @SerializedName("id") var id : String,
     @SerializedName("name") var name : String
-
 )
 data class Venues (
-
     @SerializedName("name") var name : String,
     @SerializedName("type") var type : String,
     @SerializedName("id") var id : String,
@@ -184,9 +180,13 @@ data class Venues (
     @SerializedName("city") var city : City,
     @SerializedName("state") var state : State,
     @SerializedName("country") var country : Country,
-    @SerializedName("address") var address : Address,
+    @SerializedName("address") var address : String,
     @SerializedName("location") var location : Location,
     @SerializedName("markets") var markets : List<Markets>,
     @SerializedName("_links") var Links : Links
 
+)
+
+data class Area (
+    @SerializedName("name") var name : String
 )

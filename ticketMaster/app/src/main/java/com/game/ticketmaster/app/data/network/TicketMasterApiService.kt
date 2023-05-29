@@ -10,6 +10,9 @@ interface TicketMasterApiService {
     @GET("events.json?")
     suspend fun getEventsByCity(
         @Query("city") city: String,
-        @Query("apikey") apiKey: String = ApiKeyProvider.TICKETMASTER_API_KEY
+        @Query("apikey") apiKey: String = ApiKeyProvider.TICKETMASTER_API_KEY,
+        @Query("sort") sort: String = "date,asc",
+        @Query("page") page: Int = 0,
+        @Query("size") size: Int = 50
     ): Response<EventResponse>
 }
